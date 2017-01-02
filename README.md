@@ -1,6 +1,8 @@
 # Simulador-De-Escalonador
 Simulador de um escalonador de CPU (Trabalho de S.O.)
 
+Leia o arquivo "TODO.md" para saber o que ainda precisa ser feito
+
 #Organização
 O trabalho tem que ser dividido em pelo ou menos 3 pastas principais, e depois organizar o restante, são estas:
 →src (Para arquivos de código (src de "source"))
