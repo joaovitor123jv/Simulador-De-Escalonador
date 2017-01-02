@@ -20,3 +20,7 @@ dentro da pasta src, teremos mais algumas pastas:
 	|--→Interface (Para os arquivos de interface)
 	|--→Geral (Para funcoes gerais (métodos estáticos aleatórios, enumerações úteis...))
 	|--→Escalonador (Para o escalonador em si)
+
+
+#ATUALIZAÇÂO:
+_Estou usando Java 8, qualquer incompatibilidade, me avisem pfv_
