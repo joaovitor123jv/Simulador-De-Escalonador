@@ -4,6 +4,7 @@ Simulador de um escalonador de CPU (Trabalho de S.O.)
 Leia o arquivo "TODO.md" para saber o que ainda precisa ser feito
 
 #Organização
+
 O trabalho tem que ser dividido em pelo ou menos 3 pastas principais, e depois organizar o restante, são estas:
 →src (Para arquivos de código (src de "source"))
 →bin (Para os arquivos compilador (bin de binários))
@@ -22,6 +23,17 @@ dentro da pasta src, teremos mais algumas pastas:
 	|--→Interface (Para os arquivos de interface)
 	|--→Geral (Para funcoes gerais (métodos estáticos aleatórios, enumerações úteis...))
 	|--→Escalonador (Para o escalonador em si)
+
+
+
+#Organização (Dentro do código)
+Sempre separem o cóigo com os comentários, _mesmo que não tenha nada naquela categoria_, nessa sequencia:
+
+→//Construtores
+→//Destrutores
+→//Getters
+→//Setters
+
 
 
 #ATUALIZAÇÂO:
