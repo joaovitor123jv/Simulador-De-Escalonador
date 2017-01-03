@@ -6,6 +6,7 @@ public class Processo
 	private String nome;
 	private int id;
 	private boolean EntradaSaida;
+	private ESTADO estado;
 
 	//Construtores
 	public Processo(int id, String nome, int tempoRestante, boolean orientadoCpu)
@@ -14,6 +15,7 @@ public class Processo
 		this.nome = nome;
 		this.tempoRestante = tempoRestante;
 		this.EntradaSaida = orientadoCpu;
+		this.estado= ESTADO.CRIACAO;//Precisa ser criado
 	}
 
 	//Destrutores
@@ -23,8 +25,10 @@ public class Processo
 	public int getTempoRestante(){ return this.tempoRestante; }
 	public int getBurst(){ return this.getTempoRestante(); }
 	public boolean getOrientadoACPU(){ return !this.EntradaSaida; }
+	public ESTADO getEstado(){ return this.estado; }
 
 	//Setters
+	public void setEstado(ESTADO estado) { this.estado = estado; }
 
 
 	//Comandos
@@ -45,4 +49,9 @@ public class Processo
 			return "ID: "+this.id+" Processo "+this.nome+" orientado a CPU com "+this.tempoRestante+" de tempo restante na CPU";
 		}
 	}
+}
+
+enum ESTADO
+{
+	PRONTO, CRIACAO, ESPERA, FINALIZACAO, EXECUTANDO;
 }
