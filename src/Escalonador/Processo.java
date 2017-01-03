@@ -22,8 +22,11 @@ public class Processo
 	//Getters
 	public int getId() { return this.id; }
 	public String getNome(){ return this.nome; }
+
 	public int getTempoRestante(){ return this.tempoRestante; }
+	public int getQuantum(){ return this.getTempoRestante(); }
 	public int getBurst(){ return this.getTempoRestante(); }
+
 	public boolean getOrientadoACPU(){ return !this.EntradaSaida; }
 	public ESTADO getEstado(){ return this.estado; }
 
