@@ -1,17 +1,19 @@
 //Processos (Utilizado pelo Escalonador.java)
 
-public Processo
+public class Processo
 {
 	private int tempoRestante;
 	private String nome;
 	private int id;
+	private boolean EntradaSaida;
 
 	//Construtores
-	public Processo(int id, String nome, int tempoRestante)
+	public Processo(int id, String nome, int tempoRestante, boolean orientadoCpu)
 	{
-		this.id = is;
+		this.id = id;
 		this.nome = nome;
 		this.tempoRestante = tempoRestante;
+		this.EntradaSaida = orientadoCpu;
 	}
 
 	//Destrutores
@@ -19,12 +21,14 @@ public Processo
 	public int getId() { return this.id; }
 	public String getNome(){ return this.nome; }
 	public int getTempoRestante(){ return this.tempoRestante; }
+	public int getBurst(){ return this.getTempoRestante(); }
+	public boolean getOrientadoACPU(){ return !this.EntradaSaida; }
 
 	//Setters
 
 
 	//Comandos
-	public gastaTempo(int tempoGasto)
+	public void gastaTempo(int tempoGasto)
 	{
 		this.tempoRestante = this.tempoRestante - tempoGasto;
 	}
@@ -34,11 +38,11 @@ public Processo
 	{
 		if(this.EntradaSaida)
 		{
-			return "Processo orientado a E/S com "+tempoRestante+" de tempo restante na CPU";
+			return "ID: "+this.id+" Processo "+this.nome+" orientado a E/S com "+this.tempoRestante+" de tempo restante na CPU";
 		}
 		else
 		{
-			return "Processo orientado a CPU com "+tempoRestante+" de tempo restante na CPU";
+			return "ID: "+this.id+" Processo "+this.nome+" orientado a CPU com "+this.tempoRestante+" de tempo restante na CPU";
 		}
 	}
 }
