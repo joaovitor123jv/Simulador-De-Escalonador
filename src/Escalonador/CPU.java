@@ -80,4 +80,10 @@ public class CPU implements Runnable
 			}
 		}
 	}
+
+	public void iniciar()
+	{
+		Thread t1 = new Thread(this);
+		t1.start();
+	}
 }
