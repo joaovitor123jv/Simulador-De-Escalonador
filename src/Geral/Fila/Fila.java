@@ -1,31 +1,41 @@
 public class Fila
 {
+	private int prioridade;
 	private int numeroMaximoDeElementos;
 	private int elementoFinal;
-	private int elementoInicial;
+	//elementoInicial == 0;
 
 	public Fila()//Construtor
 	{
 		this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
-		this.elementoInicial= 0;
+		this.prioridade=0;
+	}
+
+	public Fila(int prioridade)
+	{
+		this.numeroMaximoDeElementos= 10;
+		this.elementoFinal= 0;
+		this.prioridade=prioridade;
 	}
 
 	//Getters
 	private boolean getFilaVazia()
 	{
-		if(this.elementoFinal == this.elementoInicial)
+		if(this.elementoFinal == 0)
 		{
 			return true;
 		}
 		return false;
 	}
 
+	public int getPrioridade(){ return this.prioridade;}
+
 	//Setters
 
 
 	//Comandos
-	public addElemento(int elemento)
+	public addProcesso(int processo)
 	{
 	}
 
