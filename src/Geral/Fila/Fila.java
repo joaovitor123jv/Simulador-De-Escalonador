@@ -1,26 +1,33 @@
+//Fila pode ter até 10 elementos
+
+
 public class Fila
 {
-	private int prioridade;
+	private int quantum;
 	private int numeroMaximoDeElementos;
 	private int elementoFinal;
+	private Processo[] processo;
+	private CPU cpu;
 	//elementoInicial == 0;
 
 	public Fila()//Construtor
 	{
 		this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
-		this.prioridade=0;
+		this.quantum=0;
+		this.processo = new Processo[10];
 	}
 
-	public Fila(int prioridade)
+	public Fila(int quantum)
 	{
 		this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
-		this.prioridade=prioridade;
+		this.quantum=quantum;
+		this.processo = new Processo[10];
 	}
 
 	//Getters
-	private boolean getFilaVazia()
+	public boolean getFilaVazia()
 	{
 		if(this.elementoFinal == 0)
 		{
@@ -29,20 +36,22 @@ public class Fila
 		return false;
 	}
 
-	public int getPrioridade(){ return this.prioridade;}
+	public int getQuantum(){ return this.quantum;}
 
 	//Setters
 
 
 	//Comandos
-	public void addProcesso(int processo)//TODO
+	//TODO
+	public void addProcesso(Processo processo)
 	{
-		System.out.println(" Não feito ainda");
+		System.out.println("Fazendo");
+		System.out.println("ID recebido = "+processo.getId());
 	}
 
 
 	public String toString()
 	{
-		return "Essa é uma fila com "+ (this.elementoFinal+1)+" elementos";
+		return "Essa é uma fila com "+ this.elementoFinal+" elementos e "+getQuantum()+" de tempo de quantum";
 	}
 }

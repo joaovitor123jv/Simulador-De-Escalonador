@@ -40,6 +40,21 @@ public class CPU implements Runnable
 		}
 	}
 
+	public boolean sendProcesso(Processo processo)
+	{
+		if(this.getOcupado())
+		{
+			return false;
+		}
+		else
+		{
+			this.ocupado = true;
+			this.quantum = processo.getQuantum();
+			this.idProcesso = processo.getId();
+			return true;
+		}
+	}
+
 	public void encerrar()
 	{
 		this.rodando = false;
