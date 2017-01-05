@@ -4,15 +4,16 @@
 public class Fila
 {
 	private int quantum;
-	private int numeroMaximoDeElementos;
+	//Linha abaixo não utilizado ainda
+	//private int numeroMaximoDeElementos;
 	private int elementoFinal;
 	private Processo[] processo;
 	private CPU cpu;
-	//elementoInicial == 0;
 
-	public Fila()//Construtor
+//Construtores
+	public Fila()
 	{
-		this.numeroMaximoDeElementos= 10;
+		//this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
 		this.quantum=0;
 		this.processo = new Processo[10];
@@ -20,7 +21,7 @@ public class Fila
 
 	public Fila(int quantum)
 	{
-		this.numeroMaximoDeElementos= 10;
+		//this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
 		this.quantum=quantum;
 		this.processo = new Processo[10];
@@ -29,7 +30,7 @@ public class Fila
 	//Getters
 	public boolean getFilaVazia()
 	{
-		if(this.elementoFinal == 0)
+		if(this.processo[0] == null)
 		{
 			return true;
 		}
@@ -37,6 +38,17 @@ public class Fila
 	}
 
 	public int getQuantum(){ return this.quantum;}
+
+	public Processo getProcesso()
+	{
+		return this.processo[0];
+	}
+
+	public Processo getProcesso(int posicao)
+	{
+		return this.processo[posicao];
+	}
+
 
 	//Setters
 
@@ -47,8 +59,31 @@ public class Fila
 	{
 		System.out.println("Fazendo");
 		System.out.println("ID recebido = "+processo.getId());
+		int i = 0;
+		while(true)
+		{
+			if(this.processo[i] == null)
+			{
+				break;
+			}
+			else
+			{
+				i++;
+			}
+		}
+		this.processo[i] = processo;
 	}
 
+	public void rmProcesso()
+	{
+		this.processo[0] = null;
+		int  i;
+		for(i=1; this.processo[i+1] != null; i++)
+		{
+			this.processo[i-1] = this.processo[i];
+		}
+		this.processo[i] = null;
+	}
 
 	public String toString()
 	{
