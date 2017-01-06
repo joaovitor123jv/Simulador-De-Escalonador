@@ -30,7 +30,17 @@ public class Processo
 	public boolean getOrientadoACPU(){ return !this.EntradaSaida; }
 	public ESTADO getEstado(){ return this.estado; }
 
-	public boolean getFinalizado(){ if(this.tempoRestante == 0) return true; else return false;}
+	public boolean getFinalizado()
+	{ 
+		if(this.tempoRestante <= 0) 
+		{
+			return true; 
+		}
+		else 
+		{
+			return false;
+		}
+	}
 
 	//Setters
 	public void setEstado(ESTADO estado) { this.estado = estado; }

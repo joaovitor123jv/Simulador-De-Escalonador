@@ -76,12 +76,17 @@ public class Fila
 
 	public void rmProcesso()
 	{
+		System.out.println("Destruindo Processo "+this.processo[0].getId());
 		this.processo[0] = null;
-		int  i;
-		for(i=1; this.processo[i+1] != null; i++)
+		int  i=1;
+		//for(i=1; this.processo[i] != null; i++)
+		do
 		{
 			this.processo[i-1] = this.processo[i];
-		}
+			i++;
+		}while(this.processo[i-1] != null);
+		System.out.print("Processo destruído\n");
+		
 		this.processo[i] = null;
 	}
 

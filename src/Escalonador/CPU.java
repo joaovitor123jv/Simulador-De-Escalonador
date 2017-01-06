@@ -32,6 +32,7 @@ public class CPU implements Runnable
 		}
 		else
 		{
+			System.out.println("Processo \"RECEBIDO\"");
 			this.ocupado = true;
 			this.processo = processo;
 			return true;
@@ -59,12 +60,17 @@ public class CPU implements Runnable
 			}
 			if(this.ocupado)
 			{
-				System.out.println("CPU Ocupada");
+				//System.out.println("CPU Ocupada");
 				System.out.println("\tID: "+this.processo.getId());
-				this.processo.gastaBurst(1);;
-				if(this.processo.getBurst() == 0)
+				this.processo.gastaBurst(1);
+				if(this.processo.getFinalizado())
 				{
+					System.out.println("CPU Detectou Finalização de Processo");
 					this.ocupado = false;
+				}
+				else
+				{
+					System.out.println("CPU NÃO Detectou Finalização de Processo");
 				}
 			}
 			else

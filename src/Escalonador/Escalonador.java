@@ -11,7 +11,7 @@ public class Escalonador extends Thread
 	CPU cpu;
 
 	//Construtor
-	public Escalonador(String nome, TipoCPU tipoDeCpu, Processo processo[])
+	public Escalonador(String nome, TipoCPU tipoDeCpu)
 	{
 		super(nome);
 		this.tipoDeCpu = tipoDeCpu;
@@ -44,76 +44,198 @@ public class Escalonador extends Thread
 	@Override
 	public void run()
 	{
-		if(cpu.getOcupado())
+		while(true)
 		{
-			this.processo.setEstado(ESTADO.EXECUTANDO);
-		}
-		else
-		{
-			if(this.processo != null)
+			try
 			{
-				if(this.processo.getEstado() == ESTADO.EXECUTANDO)
-				{
-					if(this.processo.getFinalizado())
-					{
-						this.processo.setEstado(ESTADO.FINALIZACAO);
-						this.fila[qualFila].rmProcesso();
-					}
-				}
+				Thread.sleep(100);
 			}
-			if(this.fila[0].getFilaVazia())
+			catch(InterruptedException ex)
 			{
-				if(this.fila[1].getFilaVazia())
+				System.out.println("Interrompido");
+				System.out.print(ex);
+			}
+			System.out.println("Estado de CPI :"+ this.cpu.getOcupado());
+			if(this.cpu.getOcupado())
+			{
+				//System.out.println("CPU Ocupada");
+				this.processo.setEstado(ESTADO.EXECUTANDO);
+			}
+			else
+			{
+				System.out.println("CPU Ociosa Detectada pelo Escalonador");
+				if(this.processo != null)
 				{
-					if(this.fila[2].getFilaVazia())
+					System.out.print("Chegou aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 1");
+					if(this.processo.getEstado() == ESTADO.EXECUTANDO)
 					{
-						if(this.fila[3].getFilaVazia())
+
+						if(this.processo.getFinalizado())
 						{
-							System.out.print("CPU Ociosa \n");
+							this.processo.setEstado(ESTADO.FINALIZACAO);
 						}
-						else
-						{
-							qualFila = 3;
-							if(!this.cpu.sendProcesso(this.fila[3].getProcesso()))
-							{
-								System.out.println("Erro: CPU não pôde aceitar processo");
-							}	
-							else
-							{
-								this.processo = this.fila[qualFila].getProcesso();
-							}
-						}
-					}
-					else
-					{
-						qualFila = 2;
-						if(!this.cpu.sendProcesso(this.fila[2].getProcesso()))
-						{
-							System.out.println("Erro: CPU não pôde aceitar processo");
-						}
-						this.processo = this.fila[qualFila].getProcesso();
 					}
 				}
 				else
 				{
-					qualFila = 1;
-					if(!this.cpu.sendProcesso(this.fila[1].getProcesso()))
+					System.out.println("Processo igual a NULL");
+				}
+
+
+				if(this.fila[0].getFilaVazia())
+				{
+					System.out.println("\nFila 0 vazia");
+					if(this.fila[1].getFilaVazia())
 					{
-						System.out.println("Erro: CPU não pôde aceitar processo");
+						System.out.println("Fila 1 vazia");
+						if(this.fila[2].getFilaVazia())
+						{
+							System.out.println("Fila 2 vazia");
+							if(this.fila[3].getFilaVazia())
+							{
+								System.out.println("Fila 3 vazia");
+								System.out.print("CPU Ociosa \n");
+							}
+							else
+							{
+								System.out.println("Fila 3 não está vazia");
+
+								System.out.println("Processo Enviado");
+								if(this.processo != null)
+								{
+									System.out.println("Processo Anterior: "+this.processo.getId());	
+									System.out.println("Removendo processo anterior");
+									this.fila[qualFila].rmProcesso();
+								}
+								this.processo = this.fila[qualFila].getProcesso();
+								if(this.processo == null)
+								{
+									System.out.println("Trocando de Fila");
+
+								}
+								else
+								{
+
+
+									System.out.println("Novo Processo : "+this.processo.getId());
+									this.processo.setEstado(ESTADO.CRIACAO);
+									System.out.println("Enviando Processo à CPU");
+									if(!this.cpu.sendProcesso(this.fila[3].getProcesso()))
+									{
+										System.out.println("Erro: CPU não pôde aceitar processo");
+									}
+								}
+								qualFila = 3;
+
+
+
+
+
+
+
+
+
+
+							}
+						}
+						else
+						{
+							System.out.println("Fila 2  não está vazia");
+
+							System.out.println("Processo Enviado");
+							if(this.processo != null)
+							{
+								System.out.println("Processo Anterior: "+this.processo.getId());	
+								System.out.println("Removendo processo anterior");
+								this.fila[qualFila].rmProcesso();
+							}
+							this.processo = this.fila[qualFila].getProcesso();
+							if(this.processo == null)
+							{
+								System.out.println("Trocando de Fila");
+
+							}
+							else
+							{
+
+
+								System.out.println("Novo Processo : "+this.processo.getId());
+								this.processo.setEstado(ESTADO.CRIACAO);
+								System.out.println("Enviando Processo à CPU");
+								if(!this.cpu.sendProcesso(this.fila[2].getProcesso()))
+								{
+									System.out.println("Erro: CPU não pôde aceitar processo");
+								}
+							}
+							qualFila = 2;
+
+						}
+					}
+					else
+					{
+						System.out.println("\nFila 1  não está vazia");
+						
+						System.out.println("Processo Enviado");
+						if(this.processo != null)
+						{
+							System.out.println("Processo Anterior: "+this.processo.getId());	
+							System.out.println("Removendo processo anterior");
+							System.out.println("Removendo da fila :"+ qualFila);
+							this.fila[qualFila].rmProcesso();
+							System.out.println("Processo REMOVIDO");
+						}
+
+						this.processo = this.fila[1].getProcesso();
+						if(this.processo == null)
+						{
+							System.out.println("Trocando de Fila");
+						}
+						else
+						{
+
+
+							System.out.println("Novo Processo : "+this.processo.getId());
+							this.processo.setEstado(ESTADO.CRIACAO);
+							System.out.println("Enviando Processo à CPU");
+							if(!this.cpu.sendProcesso(this.fila[1].getProcesso()))
+							{
+								System.out.println("Erro: CPU não pôde aceitar processo");
+							}
+						}
+						qualFila = 1;
+						
+
+					}
+				}
+				else
+				{
+					System.out.println("\nFila 0 não está vazia");
+					qualFila = 0;
+					System.out.println("Processo Enviado");
+					if(this.processo != null)
+					{
+						System.out.println("Processo Anterior: "+this.processo.getId());	
+						System.out.println("Removendo processo anterior");
+						this.fila[0].rmProcesso();
 					}
 					this.processo = this.fila[qualFila].getProcesso();
+					if(this.processo == null)
+					{
+						System.out.println("Trocando de Fila");
+					}
+					else
+					{
 
+
+						System.out.println("Novo Processo : "+this.processo.getId());
+						this.processo.setEstado(ESTADO.CRIACAO);
+						System.out.println("Enviando Processo à CPU");
+						if(!this.cpu.sendProcesso(this.fila[0].getProcesso()))
+						{
+							System.out.println("Erro: CPU não pôde aceitar processo");
+						}
+					}
 				}
-			}
-			else
-			{
-				qualFila = 0;
-				if(!this.cpu.sendProcesso(this.fila[0].getProcesso()))
-				{
-					System.out.println("Erro: CPU não pôde aceitar processo");
-				}
-				this.processo = this.fila[qualFila].getProcesso();
-				this.processo.setEstado(ESTADO.CRIACAO);
 			}
 		}
 	}
@@ -149,7 +271,9 @@ public class Escalonador extends Thread
 	@Override
 	public String toString()
 	{
-		return "Este é o escalonador"+this.nome;
+		return "Escalonador "+this.nome+" Executando "+this.processo+'\n'+
+		" Quantum restante :"+ this.processo.getBurst()+'\n'+
+		" Fila :"+this.qualFila;
 
 	}
 }
