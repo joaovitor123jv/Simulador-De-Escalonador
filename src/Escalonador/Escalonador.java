@@ -36,6 +36,9 @@ public class Escalonador extends Thread
 	}
 
 	//Getters
+	public CPU getCPU(){ return this.cpu; }
+	public int getNumeroFila(){ return qualFila; }
+	public int getQuantumFila(){ return this.fila[qualFila].getQuantum(); }
 
 	//Setters
 
@@ -50,7 +53,7 @@ public class Escalonador extends Thread
 		{
 			try
 			{
-				Thread.sleep(100);
+				Thread.sleep(200);
 			}
 			catch(InterruptedException ex)
 			{

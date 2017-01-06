@@ -3,7 +3,7 @@ public class Main
 	public static void main(String args[])
 	{
 		//Re-farei
-		new Interface();
+		
 		Processo processos[] = new Processo[20];
 
 		Escalonador escalonador = new Escalonador("Teste", TipoCPU.singleCore);
@@ -20,13 +20,15 @@ public class Main
 		*/
 		CriadorDeProcessos criador = new CriadorDeProcessos();
 		escalonador.start();
+		new Interface(escalonador);
+
 		for(int i=0; i<20; i++)
 		{
 			processos[i] = criador.getProcesso();
 			escalonador.addProcesso(processos[i]);
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(5000);//Espera 5 s antes de criar um novo processo
 			}
 			catch(InterruptedException ex)
 			{

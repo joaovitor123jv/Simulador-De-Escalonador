@@ -56,7 +56,7 @@ public class CPU implements Runnable
 		{
 			try
 			{
-				Thread.sleep(100);
+				Thread.sleep(200);
 			}
 			catch(InterruptedException ex)
 			{

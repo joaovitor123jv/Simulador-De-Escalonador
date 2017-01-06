@@ -51,6 +51,9 @@ DEFINE_DIRETORIO_DE_COMPILADOS=-d
 
 ######		Regras
 all: $(MAIN)
+	cp $(PASTA_BINARIOS)/* ./
+	jar cfm Executavel.jar ./Manifest.txt *.class
+	chmod +x Executavel.jar
 	@echo "Compilação terminada com sucesso!"
 
 debug:
