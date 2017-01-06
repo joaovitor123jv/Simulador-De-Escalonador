@@ -23,6 +23,10 @@ public class CPU implements Runnable
 //Setters
 	
 //Comandos
+	public void interromper()
+	{
+		this.ocupado = false;
+	}
 
 	public boolean sendProcesso(Processo processo)
 	{
@@ -52,7 +56,7 @@ public class CPU implements Runnable
 		{
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			}
 			catch(InterruptedException ex)
 			{

@@ -8,6 +8,8 @@ public class Escalonador extends Thread
 	TipoCPU tipoDeCpu;
 	Fila fila[];
 	int qualFila;//Armazena a fila a qual o ultimo processo pertence
+	int previsao;//Controle para saber quando um processo deve ser interrompido por estouro de burst permitido pela fila(Round Robin)
+
 	CPU cpu;
 
 	//Construtor
@@ -55,18 +57,27 @@ public class Escalonador extends Thread
 				System.out.println("Interrompido");
 				System.out.print(ex);
 			}
-			System.out.println("Estado de CPI :"+ this.cpu.getOcupado());
+			//System.out.println("Estado de CPU :"+ this.cpu.getOcupado());
 			if(this.cpu.getOcupado())
 			{
 				//System.out.println("CPU Ocupada");
 				this.processo.setEstado(ESTADO.EXECUTANDO);
+				//System.out.println("Previsao = "+this.previsao);
+				//System.out.println("Burst = "+ this.processo.getBurst());
+				
+				//System.out.println("Quantum da Fila = "+ this.fila[qualFila].getQuantum());
+				if(this.processo.getBurst() == previsao)
+				{
+					this.fila[qualFila].interromperProcesso();
+					this.cpu.interromper();
+				}
 			}
 			else
 			{
-				System.out.println("CPU Ociosa Detectada pelo Escalonador");
+				//System.out.println("CPU Ociosa Detectada pelo Escalonador");
 				if(this.processo != null)
 				{
-					System.out.print("Chegou aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 1");
+				//	System.out.print("Chegou aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 1");
 					if(this.processo.getEstado() == ESTADO.EXECUTANDO)
 					{
 
@@ -76,10 +87,12 @@ public class Escalonador extends Thread
 						}
 					}
 				}
+
+				/*
 				else
 				{
 					System.out.println("Processo igual a NULL");
-				}
+				}*/
 
 
 				if(this.fila[0].getFilaVazia())
@@ -126,6 +139,11 @@ public class Escalonador extends Thread
 									}
 								}
 								qualFila = 3;
+								if(this.processo != null)
+								{
+									previsao = this.processo.getBurst() - this.fila[qualFila].getQuantum();	
+								}
+								
 
 
 
@@ -168,6 +186,10 @@ public class Escalonador extends Thread
 								}
 							}
 							qualFila = 2;
+							if(this.processo != null)
+							{
+								previsao = this.processo.getBurst() - this.fila[qualFila].getQuantum();	
+							}
 
 						}
 					}
@@ -203,7 +225,10 @@ public class Escalonador extends Thread
 							}
 						}
 						qualFila = 1;
-						
+						if(this.processo != null)
+						{
+							previsao = this.processo.getBurst() - this.fila[qualFila].getQuantum();	
+						}
 
 					}
 				}
@@ -234,6 +259,10 @@ public class Escalonador extends Thread
 						{
 							System.out.println("Erro: CPU não pôde aceitar processo");
 						}
+					}
+					if(this.processo != null)
+					{
+						previsao = this.processo.getBurst() - this.fila[qualFila].getQuantum();	
 					}
 				}
 			}

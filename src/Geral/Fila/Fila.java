@@ -16,7 +16,7 @@ public class Fila
 		//this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
 		this.quantum=0;
-		this.processo = new Processo[10];
+		this.processo = new Processo[100];
 	}
 
 	public Fila(int quantum)
@@ -24,7 +24,7 @@ public class Fila
 		//this.numeroMaximoDeElementos= 10;
 		this.elementoFinal= 0;
 		this.quantum=quantum;
-		this.processo = new Processo[10];
+		this.processo = new Processo[100];
 	}
 
 	//Getters
@@ -54,7 +54,13 @@ public class Fila
 
 
 	//Comandos
-	//TODO
+
+	//Manda processo pro final da fila, interrompendo ele
+	public void interromperProcesso()
+	{
+		this.addProcesso(this.processo[0]);
+	}
+
 	public void addProcesso(Processo processo)
 	{
 		System.out.println("Fazendo");
