@@ -95,7 +95,7 @@ public class Interface extends JFrame implements Runnable
 			{
 				lbCPU.setText("CPU : Ociosa");
 				lbIdProcesso.setText("Id do processo: Inexistente");
-				lbQuantumFila.setText("Quantum da fila abobora: Inexistente");
+				lbQuantumFila.setText("Quantum da fila: Inexistente");
 				lbBurstRestante.setText("Burst do processo : Inexistente");
 				lbNomeProcesso.setText("Nome do processo: Inexistente");
 			}
