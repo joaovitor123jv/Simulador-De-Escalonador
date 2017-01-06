@@ -3,6 +3,7 @@ public class Main
 	public static void main(String args[])
 	{
 		//Re-farei
+		new Interface();
 		Processo processos[] = new Processo[20];
 
 		Escalonador escalonador = new Escalonador("Teste", TipoCPU.singleCore);
