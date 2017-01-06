@@ -12,7 +12,7 @@ public class Main
 		escalonador.addProcesso(new Processo(6, "familia", 5, true));
 		escalonador.addProcesso(new Processo(7, "gato", 7, true));
 		escalonador.addProcesso(new Processo(8, "amor", 16, true));
-		escalonador.addProcesso(new Processo(9, "cachorro", 3, false));
+		escalonador.addProcesso(new Processo(9, "cachorro", 1, false));
 		escalonador.addProcesso(new Processo(10, "estrela", 99, true));
 		escalonador.start();
 

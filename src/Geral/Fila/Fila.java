@@ -79,7 +79,6 @@ public class Fila
 		System.out.println("Destruindo Processo "+this.processo[0].getId());
 		this.processo[0] = null;
 		int  i=1;
-		//for(i=1; this.processo[i] != null; i++)
 		do
 		{
 			this.processo[i-1] = this.processo[i];
